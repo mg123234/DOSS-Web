@@ -9,5 +9,10 @@ class UserProfileAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False
         
-admin.site.register(UserProfile,UserProfileAdmin)
+class UserAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request, obj=None):
+        return False
 
+admin.site.unregister(User)
+admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(User, UserAdmin)
