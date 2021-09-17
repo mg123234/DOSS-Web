@@ -14,6 +14,7 @@ from product.models import Promotion, Voucher
 from product.utils import decrease_quantity_product
 
 from .cart import Cart
+from django.conf import settings
 
 import datetime
 
@@ -253,7 +254,7 @@ def orderdetail(request):
             except:
                 pass
             # messages.success(request, "Your Order has been completed. Thank you ")
-            return render(request, 'order/order_completed.html',{'ordercode':ordercode,'category': category})
+            return render(request, 'order/order_completed.html',{'category': category})
         else:
             messages.warning(request, form.errors)
             return HttpResponseRedirect("/order/orderdetail")

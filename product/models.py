@@ -9,6 +9,7 @@ from django.forms import ModelForm, TextInput, Textarea, widgets
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db.models import Avg, Count
+from django.core.exceptions import ValidationError
 # Create your models here.
 class Category(MPTTModel):
     STATUS = (
@@ -155,6 +156,15 @@ class Promotion(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def clean(self):
+        if self.start_date > self.end_date:
+            raise ValidationError("Dates are incorrect. The end date must be equal or greater than start date!")
+        promotions = Promotion.objects.filter(product = self.product)
+        for promotion in promotions:
+            if promotion.id != self.id:
+                if ((self.start_date <= promotion.end_date) and (self.end_date >= promotion.start_date)) or ((self.end_date >= promotion.start_date) and (self.start_date <= promotion.end_date)):
+                    raise ValidationError("This product has a promotion in this time!")
 
     def __str__(self) -> str:
         return f'discount {self.discount}% on {self.product.title} from {self.start_date} to {self.end_date}'
