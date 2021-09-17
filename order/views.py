@@ -206,8 +206,8 @@ def orderdetail(request):
             #     data.total_after_used_voucher = cart.add_coupon(code, discount)
                 
             data.ip = request.META.get('REMOTE_ADDR')
-            ordercode= get_random_string(5).upper() # random cod
-            data.code =  ordercode
+            # ordercode= get_random_string(5).upper() # random cod
+            # data.code =  ordercode
             data.save() #
 
             #move shopcart items to order detail item
