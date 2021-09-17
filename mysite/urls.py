@@ -45,7 +45,9 @@ urlpatterns = [
     #for user
     path('user/', include('user.urls')),
     path('login/', UserViews.login_form, name='login_form'),
-    path('logout/', UserViews.logout_func, name='logout_func'),
+    # path('logout/', UserViews.logout_func, name='logout_func'),
+    path("logout/", auth_views.LogoutView.as_view(next_page="/"), name="logout"),
+
     path('signup/', UserViews.signup_form, name='signup_form'),
 
     #for admin in product detail
