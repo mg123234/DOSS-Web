@@ -178,6 +178,25 @@ def orderdetail(request):
     
 
     if request.method == 'POST':  # if there is a post
+        
+        context = {
+            'cart': cart,
+            'category': category
+        }
+
+        if len(request.session.get(settings.CART_SESSION_ID)) <= 0:
+            context['message'] = "Your cart is empty. Nothing to order!"
+            return render(request,'order/shopcart_products.html', context)
+
+        for rs in cart:
+            product_id = rs['product_id']
+            order_quantity = rs['quantity']
+            product = Product.objects.get(id = product_id)
+            store_quantity = product.amount
+            if order_quantity > store_quantity:
+                context['message'] = "Some products in stock are not enough to sell!"
+                return render(request,'order/shopcart_products.html', context)
+
         form = OrderForm(request.POST)
         #return HttpResponse(request.POST.items())
         if form.is_valid():
