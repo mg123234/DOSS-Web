@@ -56,12 +56,13 @@
                                 </select></p>
                             <p><label for="id_first_name">Country :</label>
                                 <input type="text" name="country" class="input" id="id_country" value="{{ profile.country }}"></p>
-                            <div class="pull-right">
+                            {% comment %} <div class="pull-right"> {% endcomment %}
                                 <button  type="submit" class="primary-btn">Complete Order</button>
-                            </div>
+                            {% comment %} </div> {% endcomment %}
                         </div>
 					</div>
 					{% comment %} for payment {% endcomment %}
+
 					<div class="col-md-6">
 						<div class="shiping-methods">
                             <div class="section-title">
@@ -84,6 +85,7 @@
                                 <input type="text" name="secnumber" class="input"  value=""></p> {% endcomment %}
                         </div>
 					</div> 
+					
 					<div class="col-md-12">
 						<div class="order-summary clearfix">
 							<div class="section-title">
