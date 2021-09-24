@@ -15,11 +15,11 @@ class ContactMessageAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False
         
-class SessionAdmin(admin.ModelAdmin):
-    def _session_data(self, obj):
-        return obj.get_decoded()
-    list_display = ['session_key', '_session_data', 'expire_date']
-admin.site.register(Session, SessionAdmin)
+# class SessionAdmin(admin.ModelAdmin):
+#     def _session_data(self, obj):
+#         return obj.get_decoded()
+#     list_display = ['session_key', '_session_data', 'expire_date']
+# admin.site.register(Session, SessionAdmin)
 
 
 admin.site.register(Setting, SettingsAdmin)
