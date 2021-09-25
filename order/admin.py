@@ -34,6 +34,9 @@ class OrderAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False
 
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 class OrderDetailAdmin(admin.ModelAdmin):
     list_display = ['order_id','user', 'product','price','quantity','amount']
     list_filter = ['user']
